@@ -1,8 +1,24 @@
 resource "aws_ecr_repository" "repo" {
-  name                 = "my-public-repo"
+  name                 = var.ecr_repo_name
   image_tag_mutability = "MUTABLE"
 
 
+  provisioner "local-exec" {
+    working_dir = "${path.module}/mkdocs"
+    command = <<EOT
+    "aws ecr get-login-password --region ${var.region} | docker login --username AWS --password-stdin ${var.account_id}.dkr.ecr.${var.region}.amazonaws.com"
+    "docker build -t ${var.ecr_repo_name} ."
+    "docker tag ${var.ecr_repo_name}:latest ${var.account_id}.dkr.ecr.${var.region}.amazonaws.com/${var.ecr_repo_name}:latest"
+    "docker push ${var.account_id}.dkr.ecr.${var.region}.amazonaws.com/${var.ecr_repo_name}:latest"
+    EOT
+    
+  }
+
+}
+
+output "repo22" {
+  value = aws_ecr_repository.repo.name
+  
 }
 
 

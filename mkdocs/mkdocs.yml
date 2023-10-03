@@ -1,0 +1,3 @@
+site_name: MY First MKDocs Site
+nav:
+  - Home: 'docs/index.md'
