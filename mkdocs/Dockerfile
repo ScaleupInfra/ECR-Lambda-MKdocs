@@ -8,6 +8,6 @@ WORKDIR /docs
 COPY . /docs
 
 #port
-EXPOSE 443
+EXPOSE 8000
 #cmd
 CMD ["serve", "--dev-addr=0.0.0.0:8000"]
