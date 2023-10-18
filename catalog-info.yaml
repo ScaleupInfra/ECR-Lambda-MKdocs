@@ -1,0 +1,11 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: "ECR-Lambda-MKdocs"
+  description: "app to test backstage for existing repo"
+  annotations:
+    github.com/project-slug: ScaleupInfra/ECR-Lambda-MKdocs
+spec:
+  type: service
+  owner: user:guest
+  lifecycle: experimental
